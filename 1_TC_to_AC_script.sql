@@ -201,7 +201,7 @@ ALTER TABLE character_spell ADD `specMask` TINYINT(3) UNSIGNED NOT NULL DEFAULT 
 
 -- ALTER TABLE character_talent CHANGE `talentGroup` `specMask` tinyint(3) unsigned NOT NULL DEFAULT 0;
 
-UPDATE characters SET speccount=1 WHERE speccount=0;
+UPDATE characters SET talentGroupsCount=1 WHERE talentGroupsCount=0;
 
 DELETE s FROM character_spell s JOIN __del_ability_spell t ON s.spell=t.spell; -- Remove all spells from spellability.dbc
 DELETE s FROM character_spell s JOIN __del_override_spell t ON s.spell=t.spell; -- Remove all spells from overridespell.dbc
@@ -329,7 +329,7 @@ UPDATE character_spell s JOIN character_talent t ON s.guid = t.guid AND t.spell 
 
 -- add activation spells to all characters with dual spec
 REPLACE INTO character_spell
-SELECT guid,63645,255 FROM characters WHERE speccount>1;
+SELECT guid,63645,255 FROM characters WHERE talentGroupsCount>1;
 
 REPLACE INTO character_spell
-SELECT guid,63644,255 FROM characters WHERE speccount>1;
+SELECT guid,63644,255 FROM characters WHERE talentGroupsCount>1;
